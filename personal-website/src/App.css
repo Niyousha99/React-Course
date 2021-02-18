@@ -1,0 +1,39 @@
+html {
+  background-image: linear-gradient(#8F8A8E, #BCC7DC, #CAC2D1, #FAD4D2, #FDDED7, #FAE5D5);
+}
+
+nav {
+  text-transform: uppercase;
+  color: #FDDED7;
+  border-bottom: 1px solid #FDDED7;
+  width: 30%;
+  margin-left: calc(10%/6);
+  padding: 1em 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.5em; /* Don't want to scale and get super small*/
+}
+
+img {
+  width:30%;
+  max-height: 500px;
+  margin: calc(10%/6); /*100-30-30-30*/
+}
+
+
+button{
+  background: none;
+  color: #8F8A8E;
+  border: 2px solid;
+  padding: 1em 2em;
+  font-size: 1em;
+  transition: all 0.25s;
+  /* transition: color 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s; */
+}
+
+button:hover{
+  border-color: #FDDED7;
+  color: white;
+  box-shadow: 0 0.5em 0.5em -0.4em #FDDED7; /* offset-x | offset-y | blur-radius | spread-radius | color*/
+  transform: translateY(-0.25em);
+  cursor: pointer;
+}
