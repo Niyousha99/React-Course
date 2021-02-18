@@ -13,6 +13,21 @@ nav {
   font-size: 1.5em; /* Don't want to scale and get super small*/
 }
 
+.App {
+  position: relative;
+}
+
+.buttDiv {
+  padding-bottom: 50px;
+  position: absolute;
+  top: 10%;
+  transform: translateX(450%);
+}
+
+.images {
+  padding-top: 150px;
+}
+
 img {
   width:30%;
   max-height: 500px;
@@ -22,12 +37,11 @@ img {
 
 button{
   background: none;
-  color: #8F8A8E;
+  color: #FDDED7;
   border: 2px solid;
   padding: 1em 2em;
   font-size: 1em;
-  transition: all 0.25s;
-  /* transition: color 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s; */
+  transition: all 0.25s; /* color, border-color, box-shadow, transform */
 }
 
 button:hover{

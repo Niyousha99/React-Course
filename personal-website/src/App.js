@@ -29,7 +29,7 @@ class App extends Component {
 
         <div className="buttDiv">
           <button
-            className="mainButton">OATMEAL</button>
+            className="mainButton">SHOW ME</button>
         </div>
 
         <section className="images">
