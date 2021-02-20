@@ -1,5 +1,35 @@
 
 .OatmealSection {
-    padding-top: 150px;
-    padding-left: 3rem;
+    padding-top: 100px;
+    padding-left: 0.5rem;
+    width:auto;
+}
+
+.OatmealCard {
+    display: inline-block;
+    text-align:center;
+    width: 30%;
+    height: 500px;
+    margin: 1.5rem;
+}
+
+.OatmealButton{
+    display: inline;
+    background: none;
+    background-color: rgba(202,194,209, 0.5); /* #FAE5D5 */
+    color: white;
+    border: 1.5px solid;
+    border-radius: 8px;
+    padding: 1em 2em;
+    font-size: 1em;
+    transform: translateY(-500%);
+  }
+
+
+  
+.OatmealCard:hover .OatmealButton{
+    border-color: #FAE5D5;
+    color: white;
+    box-shadow: 0 0.5em 0.5em -0.4em #CAC2D1; /* offset-x | offset-y | blur-radius | spread-radius | color*/
+    /* cursor: pointer; */
 }

@@ -8,9 +8,9 @@ class App extends Component {
       { name: "Strawberry Delight", imageName: "oatmeal_0" },
       { name: "Syrupy Coconut", imageName: "oatmeal_1" },
       { name: "Banana Cinnamon", imageName: "oatmeal_2" },
-      { name: "Chocolate Chip Berry", imageName: "oatmeal_3" },
+      { name: "Choco Berry", imageName: "oatmeal_3" },
       { name: "Berry Seed Mountain", imageName: "oatmeal_4" },
-      { name: "We Make a Perfect Pear", imageName: "oatmeal_5" },
+      { name: "Perfect Pear", imageName: "oatmeal_5" },
     ]
   }
 
@@ -21,13 +21,10 @@ class App extends Component {
 
         <nav>Niyousha's Oatmeals</nav>
 
-        <div className="buttDiv">
-          <button
-            className="mainButton">SHOW ME</button>
-        </div>
-
         <Oatmeal
           oatmeals={this.state.oatmealInfo} />
+
+        <div className="Footnote" />
 
       </div>
     );

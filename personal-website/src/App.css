@@ -1,39 +1,18 @@
 html {
-  background-image: linear-gradient(#BCC7DC, #CAC2D1, #FAD4D2, #FDDED7, #FAE5D5);
+  background-image: linear-gradient( #CAC2D1, #FAD4D2, #FDDED7, #FAE5D5);
 }
 
 nav {
   text-transform: uppercase;
-  color: #FAE5D5;
-  border-bottom: 1px solid #FAE5D5;
+  color:whitesmoke;
+  border-bottom: 1px solid whitesmoke;
   width: 30%;
   margin-left: calc(10%/6);
-  padding: 1em 0;
-  font-family: 'Raleway', sans-serif;
+  padding: 0.7em 0;
+  font-family: 'Raleway';
   font-size: 1.5em; /* Don't want to scale and get super small*/
 }
 
-.buttDiv {
-  padding-top: 25px;
-  padding-bottom: 50px;
-  position: absolute;
-  top: 10%;
-  transform: translateX(450%);
-}
-
-button{
-  background: none;
-  color: #FAE5D5;
-  border: 2px solid;
-  padding: 1em 2em;
-  font-size: 1em;
-  transition: all 0.25s; /* color, border-color, box-shadow, transform */
-}
-
-button:hover{
-  border-color: #FDDED7;
-  color: white;
-  box-shadow: 0 0.5em 0.5em -0.4em #FDDED7; /* offset-x | offset-y | blur-radius | spread-radius | color*/
-  transform: translateY(-0.25em);
-  cursor: pointer;
+.Footnote {
+  height: 100px;
 }
