@@ -10,9 +10,9 @@ class App extends Component {
   // if state changes, it will re-render the DOM
   state = {
     persons: [
-      { name: "Niyousha", age: 21 },
-      { name: "Nahid", age: 44 },
-      { name: "Ehsan", age: 48 }
+      { name: "daughter", age: 21 },
+      { name: "mom", age: 44 },
+      { name: "dad", age: 48 }
     ],
     otherState: "some other state"
   }
@@ -27,8 +27,8 @@ class App extends Component {
     // THIS DOES NOT MERGE WITH OLD STATE BUT OVERRIDES IT WITH NEW STATE
     this.setState({
       persons: [
-        { name: "Niyousha2", age: 21 },
-        { name: "Nahid2", age: 44 },
+        { name: "daughter2", age: 21 },
+        { name: "mom2", age: 44 },
         { name: newName, age: 48 }
       ]
     })
@@ -37,9 +37,9 @@ class App extends Component {
   nameChangedHandler = (event) => {
     this.setState({
       persons: [
-        { name: "Niyousha", age: 21 },
+        { name: "daughter", age: 21 },
         { name: event.target.value, age: 44 },
-        { name: "Ehsan", age: 48 }
+        { name: "dad", age: 48 }
       ]
     })
   }
@@ -80,7 +80,7 @@ class App extends Component {
           // component that doesn't have access to the state
           // "bind" controls what "this" refers to
           // next arguments after "this" are passed to invoking method
-          click={this.switchNameHandler.bind(this, "Mom")}
+          click={this.switchNameHandler.bind(this, "mom2")}
           changed={this.nameChangedHandler}>My hobby is cooking!</Person>
 
         <Person

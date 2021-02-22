@@ -76,3 +76,4 @@ List of supported events: https://reactjs.org/docs/events.html#supported-events
 Stateful a.k.a. "smart"/"container" components manage state either through hooks or state property in class-based approach.
 
 Stateless a.k.a "dumb" components have no internal logic or are presentational components (only output data). You should have more of these than stateful components!
+

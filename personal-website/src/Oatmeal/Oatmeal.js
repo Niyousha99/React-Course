@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Oatmeal.css'
+import OatmealPic from './OatmealPic/OatmealPic'
 
 import oatmeal_0 from './images/oatmeal_0.jpg'
 import oatmeal_1 from './images/oatmeal_1.jpg'
@@ -8,18 +9,11 @@ import oatmeal_3 from './images/oatmeal_3.jpg'
 import oatmeal_4 from './images/oatmeal_4.jpg'
 import oatmeal_5 from './images/oatmeal_5.jpg'
 
-import recipe_0 from './recipes/recipe_0.txt'
-import recipe_1 from './recipes/recipe_1.txt'
-import recipe_2 from './recipes/recipe_2.txt'
-import recipe_3 from './recipes/recipe_3.txt'
-import recipe_4 from './recipes/recipe_4.txt'
-import recipe_5 from './recipes/recipe_5.txt'
-
 const Oatmeal = (props) => {
 
     const [display, setDisplay] = useState(false);
 
-    let oatmealAlts = {
+    const oatmealAlts = {
         "oatmeal_0": oatmeal_0,
         "oatmeal_1": oatmeal_1,
         "oatmeal_2": oatmeal_2,
@@ -28,19 +22,14 @@ const Oatmeal = (props) => {
         "oatmeal_5": oatmeal_5
     }
 
-    let recipes = {
-        "recipe_0": recipe_0,
-        "recipe_1": recipe_1,
-        "recipe_2": recipe_2,
-        "recipe_3": recipe_3,
-        "recipe_4": recipe_4,
-        "recipe_5": recipe_5
+    const recipes = {
+        "recipe_0": "oats (50g), almond milk (250ml), banana (1), strawberry (40g), blueberry (30g), shredded dark chocolate (5g)",
+        "recipe_1": "oats (50g), coconut milk (250ml), grated coconut (15g), banana(1/2), date syrup (15g), sour cherries (10g)",
+        "recipe_2": "oats (50g), almond milk (150ml), banana (1), egg (1), walnuts (15g), goji berries (10g)",
+        "recipe_3": "oats (50g), almond milk (250ml), banana (1), cocoa powder (1 tsp), cherry sauce (20g), walnuts (10g), shredded dark chocolate (5g), shredded coconut (5g)",
+        "recipe_4": "oats (50g), almond milk (150ml), banana (1), pumpkin seeds (10g), chia seeds (1tbsp), flax seeds (1tbsp), goji berries (5g), rasberries (10g)",
+        "recipe_5": "oats (50g), almond milk (150ml), egg(1), pear (1/2), almonds (10g), goji berries (10g)"
     }
-
-    const imgStyle = {
-        width: "100%",
-        height: "500px",
-    };
 
     return (
         <section className="OatmealSection">
@@ -48,7 +37,7 @@ const Oatmeal = (props) => {
                 props.oatmeals.map((oatmeal, i) => {
                     return (
                         <div className="OatmealCard">
-                            <img src={oatmealAlts[`oatmeal_${i}`]} key={i} style={imgStyle} />
+                            <OatmealPic imgSrc={oatmealAlts[`oatmeal_${i}`]} imgKey={i} />
                             {/* {display && <p className="recipe">{recipes[fetch(`recipe_${i}`)]}</p>} */}
 
                             <button
