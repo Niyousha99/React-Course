@@ -107,3 +107,19 @@ The following command ejects from the underlying configurations and gives access
 npm run eject
 ```
 
+Change ```webpack.config.dev.js``` and ```webpack.config.prod.js```
+(line 160-ish):
+
+```
+test: /\.css$/,
+use: [
+  require.resolve('style-loader'),
+  {
+    loader: require.resolve('css-loader'),
+    options: {
+      importLoaders: 1,
+      modules: true, // enables CSS module feature
+      localIndent: '[name]__[local]__[hash:base64:5]' // used to dunamically generate unique CSS class names
+    },
+  },
+```

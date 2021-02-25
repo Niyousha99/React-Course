@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import './App.css';
+
+/* CSS Modules
+ the following line imports all classes from CSS file as properties of the 'classes' object 
+ i.e. maps them as unique class names
+ Advantage: Won't clash with same class names assigned to other styles in another component
+ since each CSS class gets a randomly generated unique name
+*/
+
+import classes from './App.css';
 //import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 // import styled from 'styled-components';
@@ -106,6 +114,9 @@ class App extends Component {
     */
 
     let persons = null;
+
+    let btnClass = [classes.Button];
+
     // render content conditionally
     if (this.state.showPersons) {
       persons = (
@@ -130,6 +141,8 @@ class App extends Component {
       };
       */
 
+      btnClass.push(classes.Red);
+
     }
     /* 
     // Another option: Ternary expression (but hard to work with)
@@ -139,12 +152,12 @@ class App extends Component {
     </div> : null // else condition (render null)
     */
 
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push("red"); // classes = ["red"]
+      assignedClasses.push(classes.red); // classes = ["red"]
     }
     if (this.state.persons.length <= 1) {
-      classes.push("bold"); // classes = ["red", "bold"]
+      assignedClasses.push(classes.bold); // classes = ["red", "bold"]
     }
 
     return (
@@ -154,16 +167,16 @@ class App extends Component {
          It is best practise to wrap everything into one root element per component!
       */
       // <StyleRoot> {/* Need to wrap in StyleRoot for Radium to work*/}
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a React App</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
+        <p className={assignedClasses.join(' ')}>This is really working!</p>
         <button
           // Can also pass methods as props to change state from another
           // component that doesn't have access to the state
           // "bind" controls what "this" refers to
           // next arguments after "this" are passed to invoking method
           // alt={this.state.showPersons}
-          className="button"
+          className={btnClass.join(' )')}
           onClick={this.togglePersonsHandler}>Toggle Persons</button>
 
         {persons}  {/*either null or holds jsx code*/}

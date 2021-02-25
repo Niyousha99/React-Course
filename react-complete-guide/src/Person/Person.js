@@ -1,9 +1,10 @@
 import React from 'react';
 //import Radium from 'radium';
-import styled from 'styled-components';
-//import './Person.css';
+// import styled from 'styled-components';
+import classes from './Person.css';
 
 // every method in this styled object creates a react component
+/*
 const StyleDiv = styled.div`
     width: 60%;
     margin: 16px auto;
@@ -16,6 +17,7 @@ const StyleDiv = styled.div`
         width: 450px;
     }
 `; // store result of method call
+*/
 
 // In its simplest form,, a Component is just a function that returns jsx
 // props = properties passed in (properties of components)
@@ -25,13 +27,14 @@ const person = (props) => {
     return (
         // want to also display children (bwtween opning and closign HTML tags)
         // <div className="Person" style={style}>
-        <StyleDiv>
-
+        // <StyleDiv>
+        <div className={classes.Person}>
             < p onClick={props.click} > I'm {props.name} and I am {props.age}!</p>
             < p > {props.children}</p >
             {/* Working 2-way binding but there is a better way */}
             < input type="text" onChange={props.changed} value={props.name} />
-        </StyleDiv>
+        </div>
+        // </StyleDiv>
         // </div >
 
     )
