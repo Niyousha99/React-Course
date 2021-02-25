@@ -4,6 +4,10 @@
   - [Build Workflow](#build-workflow)
   - [Events](#events)
   - [Stateless vs. Stateful Components](#stateless-vs-stateful-components)
+  - [Dynamic CSS](#dynamic-css)
+    - [```Radium```](#radium)
+    - [Styled Components](#styled-components)
+    - [CSS Modules](#css-modules)
 
 # React Notes
 
@@ -76,4 +80,30 @@ List of supported events: https://reactjs.org/docs/events.html#supported-events
 Stateful a.k.a. "smart"/"container" components manage state either through hooks or state property in class-based approach.
 
 Stateless a.k.a "dumb" components have no internal logic or are presentational components (only output data). You should have more of these than stateful components!
+
+## Dynamic CSS
+
+### ```Radium```
+
+Popular package used for inline CSS styles for media queries and pseudo selectors.
+
+```
+npm install --save radium
+```
+
+### Styled Components
+
+Has HTML elements as methods.
+
+```
+npm install --save styled-components
+```
+
+### CSS Modules
+
+The following command ejects from the underlying configurations and gives access to webpack congif files so that you can tweak how your code is bundled together.
+
+```
+npm run eject
+```
 
