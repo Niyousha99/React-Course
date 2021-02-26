@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 /* CSS Modules
  the following line imports all classes from CSS file as properties of the 'classes' object 
@@ -123,12 +124,15 @@ class App extends Component {
         <div>
           {this.state.persons.map((person, index) => { // want jsx representative of every array object element
             // IMPORTANT: always include key (default) property when rendering lists of data - helps update lists efficiently
-            return <Person
+
+            // ErrorBoundary is a higher-order component that wraps Person
+            // key should be something unique like id (index is not a good key cause it can change)
+            // key nust always be in outer element for a mep method
+            return <ErrorBoundary key={person.id} ><Person
               click={() => this.deletePersonHandler(index)} // executed as arrow function. alternative: bind(this, inddex)
               name={person.name}
               age={person.age}
-              key={person.id}  // key should be something unique like id (index is not a good key cause it can change)
-              changed={(event) => this.nameChangedHandler(event, person.id)} />
+              changed={(event) => this.nameChangedHandler(event, person.id)} /></ErrorBoundary>
           })}
         </div>
       );
