@@ -5,9 +5,19 @@
   - [Events](#events)
   - [Stateless vs. Stateful Components](#stateless-vs-stateful-components)
   - [Dynamic CSS](#dynamic-css)
-    - [```Radium```](#radium)
+    - [Inline Styles](#inline-styles)
+    - [Radium](#radium)
     - [Styled Components](#styled-components)
     - [CSS Modules](#css-modules)
+  - [React Components](#react-components)
+    - [Class-based vs Functional Components](#class-based-vs-functional-components)
+    - [Class-based Component Lifecycle](#class-based-component-lifecycle)
+      - [Creation](#creation)
+      - [Update for Props and State Changes](#update-for-props-and-state-changes)
+  - [Functional Component 'Lifecycle'](#functional-component-lifecycle)
+  - [Cleanup using Lifecycle Hooks and `UseEffect`](#cleanup-using-lifecycle-hooks-and-useeffect)
+  - [Optimizing Functional Components with `React.memo()`](#optimizing-functional-components-with-reactmemo)
+  - [Conditional Rendering](#conditional-rendering)
 
 # React Notes
 
@@ -81,14 +91,65 @@ Stateful a.k.a. "smart"/"container" components manage state either through hooks
 
 Stateless a.k.a "dumb" components have no internal logic or are presentational components (only output data). You should have more of these than stateful components!
 
+**Note**: Do not do this mutation of state at run time:
+```
+this.state.persons[0].name = "Not Niyousha";
+```
+
+`setState` updates react of the change in state and is only available in **class-based** components.THIS DOES NOT MERGE WITH OLD STATE BUT OVERRIDES IT WITH NEW STATE:
+```
+switchNameHandler = (newName) => {
+  this.setState({
+    persons: [
+      { name: "daughter2", age: 21 },
+      { name: "mom2", age: 44 },
+      { name: newName, age: 48 }
+    ]
+  })
+}
+```
+
+- JS class extends from Component object; think of variable as property of a class
+- `state` is managed from inside the component; this property only works in class-based components unless using hooks!
+- `state` stores JS object as internal data
+- if `state` changes, it will re-render the DOM
+
 ## Dynamic CSS
 
-### ```Radium```
+### Inline Styles
+
+Inline styles are good for scoping the style, but not making it global!
+
+### Radium
 
 Popular package used for inline CSS styles for media queries and pseudo selectors.
 
 ```
 npm install --save radium
+```
+
+Example of using Radium for pseudo-selector in in-line style:
+```
+import Radium, { StyleRoot } from 'radium';
+
+const style = { // doens't work with pseudo selectors (e.g., hover)
+  backgroundColor: "green",
+  color: "white",
+  font: "inherit", // inherit from surrounding font
+  border: "1px solid blue",
+  padding: "8px",
+  cursor: "pointer",
+  ":hover": { // using Radium for pseudo selector
+    backgroundColor: "lightgreen",
+    color: "black"
+  }
+};
+ 
+style.backgroundColor = "red"; // change style
+style[":hover"] = {
+  backgroundColor: "salmon",
+  color: "black"
+};
 ```
 
 ### Styled Components
@@ -97,6 +158,30 @@ Has HTML elements as methods.
 
 ```
 npm install --save styled-components
+```
+
+Example:
+
+```
+import styled from 'styled-components';
+
+// write regular CSS in string template argument of styled-component
+// can add dynamic values in string
+// ternary expression: if props.alt === true, then rurn red, otherwise turn green
+
+const StyledButton = styled.button`
+  background-color: ${props => props.alt ? 'red' : 'green'};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover: { 
+    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+    color: black;
+  }
+`;
 ```
 
 ### CSS Modules
@@ -161,3 +246,135 @@ Example:
 ```
 
 Now you can use ```className="Post"```  anywhere in your app and receive that styling!
+
+## React Components
+
+Clearly, writing code like this is very cumbersome:
+```
+return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'Hi, I\'m a React App!!!'), null);
+```
+
+The "App" component should have a very lean `render()` body and not deal with UI rendering too much.
+
+`this` refers to the component object at runtime!
+
+**`JSX`**
+
+- Syntaxial sugar that works in .jsx and .js
+- Allows to write "HTML-ish" code but can't use certain words
+  - e.g., "class" => "className" which translates to "class" once rendered
+- It is best practise to wrap everything into one root element per component!
+
+React callas `render()` to render some HTML code to the screen.
+
+**Note:** Can use console->rendering to flash component when it renders on the browser!
+
+### Class-based vs Functional Components
+
+Both have access to state.
+
+Functional components don't have lifecycle hooks. For a functional component, you can replace {} with () for just return statement in arrow function
+
+### Class-based Component Lifecycle
+
+**Note:** unsafe legacy lifecycles will not be called for components using new component APIs
+
+#### Creation
+
+1. `constructor(props)`
+   - Default ES6 class feature
+   - Initial i.e., setting initial state
+   - Call super(props)
+   - Don't use to cause side-effects!
+
+2. `getDerivedStateFromProps(props, state)`
+   - Sync internal state of component to props whenever they are changed
+   - Static method
+   - Very rarely used
+
+3. `render()`
+   - Prepare and structure `JSX` code
+   - Render `HTML` code
+   - Also renders child components
+
+4. `componentDidMount()`
+   - Used for causing side-effects (e.g., sending HTTP requests for data)
+   - Don't use to update state (triggers re-render which is bad for performance) - don't use setState synchronously!
+
+#### Update for Props and State Changes
+
+1. `getDerivedStateFromProps(props, state)`
+   - Syncs state of component that updates based on props
+   - Static method
+   - eg., Form control with external properties
+   - Don't use too often (more elegant way to do this)
+
+2. `shouldComponentUpdate(nextProps, nextState`
+   - Allows to cancel updating process
+   - Returns `true` or `false` depending on how you compare previous and current props/state
+   - Whether react should continue re-rendering a component
+   - Gets rid of unnecessary updating cycles
+   - Used for performance optimization
+   - Use carefully as you can stop components from rendering!
+
+3. `render()`
+   - Prepare and structure `JSX` code
+   - Render `HTML` code
+   - Also renders child components
+
+4. `getSnapshotBeforeUpdate(prevProps, prevState`
+   - Returns snapshot object of previous props and state to be freely reconfigured
+   - Used for last-minute DOM operations (e.g., last scrolling position of user)
+
+5. `componentDidUpdate()`
+   - Signals that you are done with updating
+   - Good for fetching new data from server
+   - Can now cause side-effects (e.g., send HTTP requests) but careful to not enter infinite loop!
+   - Do not call `setState` here (unless result of async task) as it will trigger unnecessary re-render cycle
+
+## Functional Component 'Lifecycle'
+
+- Most useful hook after `useState`
+- Combines all use cases you can cover of all class-based component lifecycle hooks into one react hook.
+- Equivalent to: `componentDidMount()` + `componentDidUpdate()`
+- Executes the passed function for the creation as well as every render cycle (in virtual DOM) of the functional component.
+
+To run `useEffect` only for the first time and not rerun again:
+
+```
+useEffect(() => {
+    // some function...
+}, []); // pass empty array meaning that there are no dependencies that will change for useEffect to rerun
+```
+
+To make `useEffect` rerun for a specific change:
+```
+useEffect(() => {
+  // some function...
+}, [props.persons]);
+```
+
+If you want to update using useEffect on more than one data, can call useEffect multiple times!
+
+## Cleanup using Lifecycle Hooks and `UseEffect`
+
+Good to clean up event handlers after removing a component.
+
+**Class-based component:** `componentWillUnmount()`
+
+**Functional component:** return a function in `useEffect` at the end. This will run before the main useEffect function runs, but after the (first) render cycle!
+
+## Optimizing Functional Components with `React.memo()`
+
+
+
+## Conditional Rendering
+
+Another option: Ternary expression (but hard to work with):
+
+```
+this.state.showPersons === true ?
+<div>
+...
+</div> : null // else condition (render null)
+```
